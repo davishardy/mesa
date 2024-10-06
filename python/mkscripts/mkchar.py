@@ -7,5 +7,9 @@
 
 # Import Modules
 import os
+import mkutils as mku
+
+def create_char():
+    pass
 
 

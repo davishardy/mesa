@@ -34,6 +34,7 @@ def get_seqs():
     show_name, show_root = get_show()
     show_folders = os.listdir(os.path.join(show_root, "show"))
     seqs = [folder for folder in show_folders if "mod" not in folder]
+    seqs.remove(".DS_Store") # Remove index file if using MacOS
 
     return seqs
 
@@ -48,3 +49,4 @@ def get_input():
     cli_input.pop(0)
 
     return cli_input
+
