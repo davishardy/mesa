@@ -1,9 +1,12 @@
-# mkutils.py
-# Version 1.0.0
-# 2024-10-5
+# path.py
+# Utilites to evaluate paths in the project
 # Davis Hardy
 
-# Utilities for make scripts
+# Version =  1.0.0
+# Created = 10/9/2024
+# Last Edited = 10/9/2024
+
+
 
 # Import Modules
 import os
