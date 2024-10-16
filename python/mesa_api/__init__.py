@@ -1,3 +1,3 @@
-# Import mesa modules into package
+'''Import mesa modules into package'''
 
-from create import *
+from .path import Path
