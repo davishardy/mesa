@@ -1,3 +1,9 @@
 .DS_Store
 python/mesa_api/__pycache__/__init__.cpython-39.pyc
 python/mesa_api/__pycache__/path.cpython-39.pyc
+python/mesa_api/__pycache__/__init__.cpython-311.pyc
+python/mesa_api/__pycache__/path.cpython-311.pyc
+python/mesa_api/__pycache__/__init__.cpython-312.pyc
+python/mesa_api/__pycache__/create.cpython-311.pyc
+python/mesa_api/__pycache__/create.cpython-312.pyc
+python/mesa_api/__pycache__/path.cpython-312.pyc
