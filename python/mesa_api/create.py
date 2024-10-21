@@ -71,7 +71,7 @@ class Create:
         # End _create_empty
 
 
-    def show(self, show_name: str) -> None:
+    def show(self) -> None:
         """
         Creates a show folder for assets and sequences to be populated with
         Input = Show name
@@ -101,15 +101,15 @@ class Create:
         active_seqs = [seq_dir for seq_dir in os.listdir(self.root) if os.path.isdir(os.path.join(self.root, seq_dir)) and seq_dir.startswith(self.show_id)]  # Find sequences in the project
 
         # Adds first letter of show prefix to the sequence number
-        show_prefixed_sequence = f"{self.show_id}{seq_name}"
+        prefixed_sequence = f"{self.show_id}{seq_name}"
 
 
-        if show_prefixed_sequence not in active_seqs:
+        if prefixed_sequence not in active_seqs:
             # Creates sequence directory
-            os.mkdir(os.path.join(self.root, show_prefixed_sequence))
+            os.mkdir(os.path.join(self.root, prefixed_sequence))
             # Creates directories within sequence directory based off template
             for dir in self._parse_template("base_template.json", "sequence"):
-                self._create_dir(os.path.join(self.root, show_prefixed_sequence, dir))
+                self._create_dir(os.path.join(self.root, prefixed_sequence, dir))
 
         else:
             print("Sequence Exists")
@@ -117,13 +117,26 @@ class Create:
         # End sequence
 
 
-    def shot(self, shot_name: str) -> None:
+    def shot(self, seq_name: str, shot_name: str) -> None:
         """
         Creates shot if not present
         Input = shot name string
         Output = None
         """
-        pass
+        # Find existing shots in folder
+        prefixed_sequence = f"{self.show_id}{seq_name}"
+        prefixed_shot = f"{self.show_id}{seq_name}_{shot_name}"
 
+        active_shots = [shot for shot in os.listdir(os.path.join(self.root, prefixed_sequence)) if os.path.isdir(os.path.join(self.root, prefixed_sequence, prefixed_shot)) and prefixed_shot.startswith(self.show_id)]
+
+        if prefixed_shot not in active_shots:
+            # Creates sequence directory
+            os.mkdir(os.path.join(self.root, prefixed_sequence, prefixed_shot))
+            # Creates directories within sequence directory based off template
+            for dir in self._parse_template("base_template.json", "shot"):
+                self._create_dir(os.path.join(self.root, prefixed_sequence, prefixed_shot, dir))
+
+        else:
+            print("Shot Exists")
 
         # End shot
