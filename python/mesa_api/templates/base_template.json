@@ -1,5 +1,5 @@
 {
-    "show" : ["modset", "modchar", "modprop", "farm"],
-    "sequence" : ["modset", "modprop", "modlgt", "modfx", "modchar", "modseqover", "modrendersettings", "modcrowd"],
-    "shot" : ["modset", "modprop", "modcam", "modlgt", "modfx", "modchar", "modshotover", "modrendersettings", "modcrowd", "modcharfx"]
+    "show" : ["modset", "modchar", "modprop", "farm", "modshowovers", "modrendersettings", "modcam"],
+    "sequence" : ["modset", "modprop", "modlgt", "modfx", "modchar", "modseqoverss", "modrendersettings", "modcrowd", "modcam"],
+    "shot" : ["modset", "modprop", "modcam", "modlgt", "modfx", "modchar", "modshotovers", "modrendersettings", "modcrowd", "modcharfx"]
 }
