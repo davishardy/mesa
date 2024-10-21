@@ -12,31 +12,69 @@ class Create:
         Initialize create object
         """
         # Create variable for the templates directory
-        self.tempalte_dir = os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir, "templates"))
+        self.template_dir = os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir, "templates"))
         
         # Environment variables
         self.name = os.getenv("show")
         self.root = os.getenv("show_root")
+        self.show_id = self.name[0]
+
+        # End __init__
 
 
-    def _parse_json(self, template):
+    def _parse_template(self, template_name: str, template_type: str, ) -> list:
         """
         Parse a json file base on the element requested from it
+        Input =  Template keyword
+        Output = List of folder names
         """
-        pass
+        # Load json file
+        with open(os.path.join(self.template_dir, template_name), "r") as file: # Maybe replace with a system path
+            templates = json.load(file)
+
+        if template_type in templates:
+            target_template = templates[template_type]
+            return target_template
+
+        # End _parse_template
 
 
-    def _create_dirs(self, paths):
+    def _create_dir(self, path: str) -> None:
         """
         Create desired paths
+        Input = path of desired folder
+        Output = None
         """
-        pass
+       # Checks if folder is present, creates if not present
+        if not os.path.exists(path):
+            os.mkdir(path)
+        else:
+            print(f"Folder exists:\n{path}\n")
+
+        # End _create_dir
 
 
-    def show(self, show_name):
+    def _create_empty(self, filepath: str) -> None:
+        """
+        Creates an empty file for use later in the pipeline
+        Input = File path including the name
+        Output = None
+        """
+        try:
+            if os.path.exists(filepath) == False:  # Check if file exists
+                with open(filepath, 'w') as file:  # Create file
+                    pass
+        except FileExistsError:
+            # Report if file exists already
+            print(f"{filepath} exists already")
+
+        # End _create_empty
+
+
+    def show(self, show_name: str) -> None:
         """
         Creates a show folder for assets and sequences to be populated with
-        Input = show_name
+        Input = Show name
         Output = None
         """
 
@@ -47,49 +85,45 @@ class Create:
             print("Show folder exists")
 
         # Create global asset folders based on json file
+        for dir in self._parse_template("base_template.json", "show"):
+            self._create_dir(os.path.join(self.root, dir))
+
+        # End show
+
     
-    def sequence(self, seq_name):
+    def sequence(self, seq_name: str) -> None:
         """
         Creates sequence if not present
-        Input = sequence name string
-        Output - None
+        Input = sequence name string without any prefixes
+        Output = None
         """
-        pass
+        # Find active sequences
+        active_seqs = [seq_dir for seq_dir in os.listdir(self.root) if os.path.isdir(os.path.join(self.root, seq_dir)) and seq_dir.startswith(self.show_id)]  # Find sequences in the project
 
-    def shot(self, shot_name):
+        # Adds first letter of show prefix to the sequence number
+        show_prefixed_sequence = f"{self.show_id}{seq_name}"
+
+
+        if show_prefixed_sequence not in active_seqs:
+            # Creates sequence directory
+            os.mkdir(os.path.join(self.root, show_prefixed_sequence))
+            # Creates directories within sequence directory based off template
+            for dir in self._parse_template("base_template.json", "sequence"):
+                self._create_dir(os.path.join(self.root, show_prefixed_sequence, dir))
+
+        else:
+            print("Sequence Exists")
+
+        # End sequence
+
+
+    def shot(self, shot_name: str) -> None:
         """
         Creates shot if not present
         Input = shot name string
-        Output - None
+        Output = None
         """
         pass
 
 
-
-# Example of using methods within the same class - from mr.gpt
-"""
-class MyClass:
-    def __init__(self, data):
-        self.data = data
-
-    # Public method that calls helper methods
-    def process_data(self):
-        cleaned_data = self._clean_data(self.data)
-        transformed_data = self._transform_data(cleaned_data)
-        print(f"Processed data: {transformed_data}")
-
-    # Private helper method for cleaning data
-    def _clean_data(self, data):
-        # Assume data is a list, this removes any empty elements
-        return [item for item in data if item]
-
-    # Private helper method for transforming data
-    def _transform_data(self, data):
-        # Example transformation: converting all strings to uppercase
-        return [item.upper() for item in data]
-
-# Example usage
-my_instance = MyClass(["hello", "", "world"])
-my_instance.process_data()
-
-"""
+        # End shot
