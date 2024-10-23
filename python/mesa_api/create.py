@@ -140,3 +140,35 @@ class Create:
             print("Shot Exists")
 
         # End shot
+    
+
+    def create_asset(self, asset_path, asset_name, structure):
+        """
+        Creates folder from a json template
+        Input = path to asset, asset name, json template
+        Output = None
+        """
+
+        # Create folders and iterate through contents
+        if structure['type'] == 'folder':
+            replaced_name = structure["name"].replace("placeholder", asset_name)
+            
+            folder_path = os.path.join(asset_path, replaced_name)
+            if not os.path.exists(folder_path):
+                os.makedirs(folder_path)
+            print(f"Folder created: {folder_path}")
+        
+            # Recursively create contents
+            for content in structure.get('contents', []):
+                self.create_asset(folder_path, asset_name, content)
+            
+    
+        # Create files
+        elif structure['type'] == 'file':
+            replaced_name = structure["name"].replace("placeholder", asset_name)
+            file_path = os.path.join(asset_path, replaced_name)
+            if not os.path.exists(file_path):
+                with open(file_path, 'w') as f:
+                    pass
+                print(f"File created: {file_path}")
+        
