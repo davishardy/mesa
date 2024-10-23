@@ -27,6 +27,16 @@
             ]
         },
         {
+            "name": "lgt",
+            "type": "folder",
+            "contents": [
+                {
+                    "name": "lgt.usdc",
+                    "type": "file"
+                }
+            ]
+        },
+        {
             "name": "placeholder.usd",
             "type": "file"
         },
