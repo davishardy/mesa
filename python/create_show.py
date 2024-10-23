@@ -12,5 +12,9 @@ print(cur_show.find_shots(cur_show.seqs[0]))
 
 cur_show_two = mesa_api.Create()
 cur_show_two.show()
-cur_show_two.sequence("020")
-cur_show_two.shot("020", "0010")
+seq_list = ["010", "020", "030", "040", "050", "060", "070"]
+shot_list = ["0010", "0020", "0030", "0040"]
+for seq in seq_list:
+    cur_show_two.sequence(seq)
+    for shot in shot_list:
+        cur_show_two.shot(seq, shot)
