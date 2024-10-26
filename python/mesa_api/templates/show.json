@@ -3,36 +3,36 @@
     "type": "folder",
     "contents": [
         {
-            "name": "geo",
-            "type": "folder",
-            "contents": [
-                {
-                    "name": "geo.usdc",
-                    "type": "file"
-                }
-            ]
+            "name": "farm",
+            "type": "folder"
         },
         {
-            "name": "mtl",
-            "type": "folder",
-            "contents": [
-                {
-                    "name": "tex",
-                    "type": "folder"
-                },
-                {
-                    "name": "mtl.usdc",
-                    "type": "file"
-                }
-            ]
+            "name": "modcam",
+            "type": "folder"
         },
         {
-            "name": "placeholder.usd",
-            "type": "file"
+            "name": "modchar",
+            "type": "folder"
         },
         {
-            "name": "placeholder_payload.usdc",
-            "type": "file"
+            "name": "modprop",
+            "type": "folder"
+        },
+        {
+            "name": "modrender",
+            "type": "folder"
+        },
+        {
+            "name": "modset",
+            "type": "folder"
+        },
+        {
+            "name": "modshow",
+            "type": "folder"
+        },
+        {
+            "name": "modlgt",
+            "type": "folder"
         }
     ]
 }
