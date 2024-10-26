@@ -28,7 +28,7 @@ class Path:
             self.seqs = [seq_dir for seq_dir in os.listdir(self.root) if os.path.isdir(os.path.join(self.root, seq_dir)) and seq_dir.startswith(self.show_id)]
         except ValueError:
             print(f"Current show directory does not exist!\nShow directory = {self.root}")
-        
+
         # END find_sequences
 
     def find_shots(self, seq):
@@ -45,7 +45,7 @@ class Path:
 
         # Get all shots within the sequence
         sequence_shots = [shot_dir for shot_dir in os.listdir(sequence_dir) if os.path.isdir(os.path.join(sequence_dir, shot_dir)) and shot_dir.startswith(seq)]
-        
+
         return sequence_shots
-    
+
         # END find_shots
