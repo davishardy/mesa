@@ -14,27 +14,11 @@
         },
         {
             "name": "mtl",
-            "type": "folder",
-            "contents": [
-                {
-                    "name": "tex",
-                    "type": "folder"
-                },
-                {
-                    "name": "mtl.usdc",
-                    "type": "file"
-                }
-            ]
+            "type": "folder"
         },
         {
             "name": "lgt",
-            "type": "folder",
-            "contents": [
-                {
-                    "name": "lgt.usdc",
-                    "type": "file"
-                }
-            ]
+            "type": "folder"
         },
         {
             "name": "placeholder.usd",
