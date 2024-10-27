@@ -1,8 +1,4 @@
-"""
-Create a show with the proper config
-"""
-
 import mesa_api
 
-current_show = mesa_api.Create()
-current_show.show()
+current_show = mesa_api.Create() # creates show object to interact with
+current_show.show() # creates the show folder within a collabspace

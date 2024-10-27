@@ -43,7 +43,7 @@ class Create:
     def create_asset(self, asset_path, asset_name, structure):
         """
         Creates folder from a json template
-        Input = path to asset, asset name, json template
+        Input = Path to asset, asset name, json template
         Output = None
         """
 
@@ -101,14 +101,13 @@ class Create:
 
         if prefixed_sequence not in active_seqs:
             # Creates sequence directory
-            os.mkdir(os.path.join(self.root, prefixed_sequence))
+            new_seq_dir = os.path.join(self.root, prefixed_sequence)
+            os.mkdir(new_seq_dir)
             # Creates directories within sequence directory based off template
             sequence_template = self._load_template("sequence")
-
+            self.create_asset(self.root, prefixed_sequence, sequence_template)
         else:
             print("Sequence Exists")
-        '''
-        pass
         # End sequence
 
 
@@ -118,22 +117,36 @@ class Create:
         Input = shot name string
         Output = None
         """
-        '''
+
         # Find existing shots in folder
         prefixed_sequence = f"{self.show_id}{seq_name}"
         prefixed_shot = f"{self.show_id}{seq_name}_{shot_name}"
+        sequence_location = os.path.join(self.root, prefixed_sequence)
 
-        active_shots = [shot for shot in os.listdir(os.path.join(self.root, prefixed_sequence)) if os.path.isdir(os.path.join(self.root, prefixed_sequence, prefixed_shot)) and prefixed_shot.startswith(self.show_id)]
+        active_shots = [shot for shot in os.listdir(sequence_location) if os.path.isdir(os.path.join(self.root, prefixed_sequence, prefixed_shot)) and prefixed_shot.startswith(self.show_id)]
 
         if prefixed_shot not in active_shots:
-            # Creates sequence directory
-            os.mkdir(os.path.join(self.root, prefixed_sequence, prefixed_shot))
-            # Creates directories within sequence directory based off template
-            for dir in self._parse_template("base_template.json", "shot"):
-                self._create_dir(os.path.join(self.root, prefixed_sequence, prefixed_shot, dir))
+            shot_template = self._load_template("shot")
+            self.create_asset(sequence_location, prefixed_shot, shot_template)
 
         else:
             print("Shot Exists")
-        '''
-        pass
+
         # End shot
+
+
+    def show_element(self, asset_dir, asset_type, name):
+        """
+        Creates a show element if not present
+        Input = Directory that you want the asset to go into, the type of asset, the name of the asset
+        Output = None
+        """
+        # Location of the asset directory ex. modset
+        element_location = os.path.join(self.root, asset_dir)
+
+        # Check if the asset exists
+        if not os.path.exists(os.path.join(element_location, name)):
+
+            # Load the asset template and create it
+            element_template = self._load_template(asset_type)
+            self.create_asset(element_location, name, element_template)
