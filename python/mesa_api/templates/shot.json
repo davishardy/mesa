@@ -1,13 +1,22 @@
 {
-    "name": "show",
+    "name": "placeholder",
     "type": "folder",
     "contents": [
         {
-            "name": "farm",
+            "name": "modset",
             "type": "folder"
         },
         {
-            "name": "modcam",
+            "name": "modprop",
+            "type": "folder"
+        },
+
+        {
+            "name": "modlgt",
+            "type": "folder"
+        },
+        {
+            "name": "modfx",
             "type": "folder"
         },
         {
@@ -15,7 +24,11 @@
             "type": "folder"
         },
         {
-            "name": "modprop",
+            "name": "modcharfx",
+            "type": "folder"
+        },
+        {
+            "name": "modseq",
             "type": "folder"
         },
         {
@@ -23,12 +36,9 @@
             "type": "folder"
         },
         {
-            "name": "modset",
-            "type": "folder"
-        },
-        {
-            "name": "modlgt",
+            "name": "modcrowd",
             "type": "folder"
         }
+        
     ]
 }

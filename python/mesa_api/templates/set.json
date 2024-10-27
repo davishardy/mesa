@@ -14,7 +14,17 @@
         },
         {
             "name": "mtl",
-            "type": "folder"
+            "type": "folder",
+            "contents": [
+                {
+                    "name": "tex",
+                    "type": "folder"
+                },
+                {
+                    "name": "mtl.usdc",
+                    "type": "file"
+                }
+            ]
         },
         {
             "name": "lgt",
