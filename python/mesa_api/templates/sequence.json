@@ -16,18 +16,6 @@
             "type": "folder"
         },
         {
-            "name": "modfx",
-            "type": "folder"
-        },
-        {
-            "name": "modchar",
-            "type": "folder"
-        },
-        {
-            "name": "modcharfx",
-            "type": "folder"
-        },
-        {
             "name": "modseq",
             "type": "folder"
         },
