@@ -11,3 +11,15 @@ NP : GUI
 Small:
 NP : WFH features
 NP : Playblasting
+
+
+
+
+List:
+
+Create show
+Create sequence
+Create shot
+Create asset
+- Create asset json files
+
