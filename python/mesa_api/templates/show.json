@@ -1,0 +1,34 @@
+{
+    "name": "show",
+    "type": "folder",
+    "contents": [
+        {
+            "name": "farm",
+            "type": "folder"
+        },
+        {
+            "name": "modcam",
+            "type": "folder"
+        },
+        {
+            "name": "modchar",
+            "type": "folder"
+        },
+        {
+            "name": "modprop",
+            "type": "folder"
+        },
+        {
+            "name": "modrender",
+            "type": "folder"
+        },
+        {
+            "name": "modset",
+            "type": "folder"
+        },
+        {
+            "name": "modlgt",
+            "type": "folder"
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "name": "placeholder",
+    "type": "folder",
+    "contents": [
+        {
+            "name": "modset",
+            "type": "folder"
+        },
+        {
+            "name": "modprop",
+            "type": "folder"
+        },
+
+        {
+            "name": "modlgt",
+            "type": "folder"
+        },
+        {
+            "name": "modseq",
+            "type": "folder"
+        },
+        {
+            "name": "modrender",
+            "type": "folder"
+        },
+        {
+            "name": "modcrowd",
+            "type": "folder"
+        }
+        
+    ]
+}

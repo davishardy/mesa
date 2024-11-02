@@ -1,0 +1,25 @@
+Large Features:
+
+DONE : Asset folders creation using json files
+NP : File syncing to farm, collabspace, personal drives, and monty computer drives
+NP: Asset publishing
+
+Medium:
+NP : GUI
+
+
+Small:
+NP : WFH features
+NP : Playblasting
+
+
+
+
+List:
+
+Create show
+Create sequence
+Create shot
+Create asset
+- Create asset json files
+
