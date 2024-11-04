@@ -18,3 +18,4 @@ stage.GetRootLayer().Save()
 
 print("USD file saved: simple_scene.usda")
 
+# https://help.autodesk.com/view/MAYAUL/2024/ENU/?guid=GUID-C452B331-7C4D-4B58-A1BA-D03775F266A8
