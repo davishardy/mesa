@@ -12,7 +12,8 @@ import mesa_api
 
 # import the Qt framework
 from PySide6.QtCore import QSize, Qt
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QWidget, QLabel, QComboBox, QLineEdit, QTabWidget
+from PySide6.QtGui import QPalette, QColor
 
 
 
@@ -22,19 +23,55 @@ class MainWindow(QMainWindow):
 
         # UI setup
         self.setWindowTitle("Mesa")
-        self.setMinimumSize(QSize(200, 200))
-        self.setMaximumSize(QSize(500, 500))
+        #self.setMinimumSize(QSize(200, 200))
+        #self.setMaximumSize(QSize(700, 500))
+        self.setFixedSize(QSize(700, 500)) # Set window size
 
+        palette = self.palette()
+        palette.setColor(QPalette.Window, QColor(38, 38, 38)) # Set bg color to grey
+        self.setPalette(palette)
 
+        """
         # Create show button
         show_button = QPushButton("Create Show")
         show_button.clicked.connect(self.create_show)
 
-
         # Placement
         self.setCentralWidget(show_button)
+        """
+        """
+        asset_type_label = QLabel("Asset Type:")
+        self.asset_type = QComboBox()
+        asset_types = ["prop", "set", "char", "fx"]
+        self.asset_type.addItems(asset_types)
+        asset_name = QLineEdit("Asset Name")
+        asset_name.setFixedWidth(200)
+        asset_create = QPushButton("Create")
 
+        layout = QHBoxLayout()
+        layout.addWidget(asset_type_label)
+        layout.addWidget(self.asset_type)
+        layout.addWidget(asset_name)
+        layout.addWidget(asset_create)
+        """
 
+        tabs = QTabWidget()
+        tabs.setTabPosition(QTabWidget.North)
+        tabs.setTabShape(QTabWidget.TabShape.Triangular)
+        tabs.setMovable(True)
+
+        tabs.addTab(QPushButton("hi"), "Setup")
+        tabs.addTab(QPushButton("Hi There"), "Create")
+        tabs.addTab(QPushButton("Hi There"), "Update")
+        tabs.addTab(QPushButton("Hi There"), "Render")
+        tabs.addTab(QPushButton("Hi There"), "Open")
+        tabs.setCurrentIndex(2)
+
+        self.setCentralWidget(tabs)
+
+        #widget = QWidget()
+        #widget.setLayout(layout)
+        #self.setCentralWidget(widget)
 
     # Button functionality
     def create_show(self):
@@ -58,6 +95,7 @@ class MainWindow(QMainWindow):
 app = QApplication(["Mesa"]) # App name in list
 
 window = MainWindow()
+window.setWindowIconText("Hi")
 window.show()
 
 app.exec()
