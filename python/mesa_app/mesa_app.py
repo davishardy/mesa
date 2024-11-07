@@ -35,45 +35,67 @@ class MainWindow(QMainWindow):
 
 
 
-        # Shared asset creation elements
-        show_asset_type_label = QLabel("Show Asset Type:")
-        show_asset_name = QLineEdit("Show Asset Name")
-        show_asset_name.setFixedWidth(200)
-        show_asset_create = QPushButton("Create Show Asset")
+        # Setup shot asset update ui
+        """
+        shot_update_asset = QWidget()
+        shot_update_asset_layout = QHBoxLayout()
+        shot_update_asset_layout.addWidget(shot_update_asset_type_label)
+        shot_update_asset_layout.addWidget(self.shot_update_asset_types)
+        shot_update_asset_layout.addWidget(shot_update_asset_name)
+        shot_update_asset_layout.addWidget(shot_update_asset_create)
+        shot_update_asset.setLayout(shot_update_asset_layout)
+        """
 
-        shot_asset_type_label = QLabel("Shot Asset Type:")
-        shot_asset_name = QLineEdit("Shot Asset Name")
-        shot_asset_name.setFixedWidth(200)
-        shot_asset_create = QPushButton("Create Shot Asset")
+        # Setup update tabs
+        update_tabs = QTabWidget()
+        update_tabs.setTabPosition(QTabWidget.North)
+        update_tabs.setTabShape(QTabWidget.TabShape.Rounded)
+        update_tabs.setMovable(False)
+
+        # Add tabs to update tabs
+        update_tabs.addTab(QPushButton("Update Show Asset"), "Show") # Replace with show update setup
+        update_tabs.addTab(QPushButton("Update Shot Asset"), "Shot") # Replace with shot update setup
+
+
+        # _________________ Asset Creation Tabs _________________
+
 
         # Show asset creation elements       
-        self.show_asset_types = QComboBox()
-        show_asset_type_options = ["prop", "set", "char"]
-        self.show_asset_types.addItems(show_asset_type_options)
+        self.show_create_asset_types = QComboBox()
+        show_create_asset_type_options = ["prop", "set", "char"]
+        self.show_create_asset_types.addItems(show_create_asset_type_options)
+        show_create_asset_type_label = QLabel("Show Asset Type:")
+        show_create_asset_name = QLineEdit("Show Asset Name")
+        show_create_asset_name.setFixedWidth(200)
+        show_create_asset_create = QPushButton("Create Show Asset")
 
         # Shot asset creation elements
-        self.shot_asset_types = QComboBox()
-        shot_asset_type_options = ["fx", "charfx", "lgt", "crowd"]
-        self.shot_asset_types.addItems(shot_asset_type_options)
+        self.shot_create_asset_types = QComboBox()
+        shot_create_asset_type_options = ["fx", "charfx", "lgt", "crowd"]
+        self.shot_create_asset_types.addItems(shot_create_asset_type_options)
+        shot_create_asset_type_label = QLabel("Shot Asset Type:")
+        shot_create_asset_name = QLineEdit("Shot Asset Name")
+        shot_create_asset_name.setFixedWidth(200)
+        shot_create_asset_create = QPushButton("Create Shot Asset")
 
 
         # Setup show asset creation ui
-        show_asset = QWidget()
-        show_asset_layout = QHBoxLayout()
-        show_asset_layout.addWidget(show_asset_type_label)
-        show_asset_layout.addWidget(self.show_asset_types)
-        show_asset_layout.addWidget(show_asset_name)
-        show_asset_layout.addWidget(show_asset_create)
-        show_asset.setLayout(show_asset_layout)
+        show_create_asset = QWidget()
+        show_create_asset_layout = QHBoxLayout()
+        show_create_asset_layout.addWidget(show_create_asset_type_label)
+        show_create_asset_layout.addWidget(self.show_create_asset_types)
+        show_create_asset_layout.addWidget(show_create_asset_name)
+        show_create_asset_layout.addWidget(show_create_asset_create)
+        show_create_asset.setLayout(show_create_asset_layout)
 
         # Setup shot asset creation ui
-        shot_asset = QWidget()
-        shot_asset_layout = QHBoxLayout()
-        shot_asset_layout.addWidget(shot_asset_type_label)
-        shot_asset_layout.addWidget(self.shot_asset_types)
-        shot_asset_layout.addWidget(shot_asset_name)
-        shot_asset_layout.addWidget(shot_asset_create)
-        shot_asset.setLayout(shot_asset_layout)
+        shot_create_asset = QWidget()
+        shot_create_asset_layout = QHBoxLayout()
+        shot_create_asset_layout.addWidget(shot_create_asset_type_label)
+        shot_create_asset_layout.addWidget(self.shot_create_asset_types)
+        shot_create_asset_layout.addWidget(shot_create_asset_name)
+        shot_create_asset_layout.addWidget(shot_create_asset_create)
+        shot_create_asset.setLayout(shot_create_asset_layout)
 
 
         # Setup create asset tabs
@@ -83,8 +105,8 @@ class MainWindow(QMainWindow):
         create_tabs.setMovable(False)
 
         # Add tabs to create tabs
-        create_tabs.addTab(show_asset, "Show") # Replace with show asset creation setup
-        create_tabs.addTab(shot_asset, "Shot") # Replace with shot asset creation setup
+        create_tabs.addTab(show_create_asset, "Show") # Replace with show asset creation setup
+        create_tabs.addTab(shot_create_asset, "Shot") # Replace with shot asset creation setup
 
 
         # _________________ Core Tabs _________________
@@ -134,7 +156,7 @@ class MainWindow(QMainWindow):
 
 
 # create app object
-app = QApplication(["Mesa"]) # App name in list
+app = QApplication(["Mesa"]) # App name in list, maybe add the show name
 window = MainWindow()
 window.show()
 
