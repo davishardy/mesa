@@ -7,12 +7,13 @@ https://www.sidefx.com/docs/houdini/ref/windows/pythonpaneleditor.html
 """
 import sys
 import os
+import subprocess
 sys.path.append(os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir, os.pardir))) # Try to make this less hardcoded
 import mesa_api
 
 # import the Qt framework
 from PySide6.QtCore import QSize, Qt
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QWidget, QLabel, QComboBox, QLineEdit, QTabWidget
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QWidget, QLabel, QComboBox, QLineEdit, QTabWidget, QVBoxLayout
 from PySide6.QtGui import QPalette, QColor
 
 
@@ -31,47 +32,83 @@ class MainWindow(QMainWindow):
         palette.setColor(QPalette.Window, QColor(38, 38, 38)) # Set bg color to grey
         self.setPalette(palette)
 
-        """
-        # Create show button
-        show_button = QPushButton("Create Show")
-        show_button.clicked.connect(self.create_show)
 
-        # Placement
-        self.setCentralWidget(show_button)
-        """
-        """
-        asset_type_label = QLabel("Asset Type:")
-        self.asset_type = QComboBox()
-        asset_types = ["prop", "set", "char", "fx"]
-        self.asset_type.addItems(asset_types)
-        asset_name = QLineEdit("Asset Name")
-        asset_name.setFixedWidth(200)
-        asset_create = QPushButton("Create")
 
-        layout = QHBoxLayout()
-        layout.addWidget(asset_type_label)
-        layout.addWidget(self.asset_type)
-        layout.addWidget(asset_name)
-        layout.addWidget(asset_create)
-        """
 
-        tabs = QTabWidget()
-        tabs.setTabPosition(QTabWidget.North)
-        tabs.setTabShape(QTabWidget.TabShape.Triangular)
-        tabs.setMovable(True)
+        # Shared asset creation elements
+        show_asset_type_label = QLabel("Show Asset Type:")
+        show_asset_name = QLineEdit("Show Asset Name")
+        show_asset_name.setFixedWidth(200)
+        show_asset_create = QPushButton("Create Show Asset")
 
-        tabs.addTab(QPushButton("hi"), "Setup")
-        tabs.addTab(QPushButton("Hi There"), "Create")
-        tabs.addTab(QPushButton("Hi There"), "Update")
-        tabs.addTab(QPushButton("Hi There"), "Render")
-        tabs.addTab(QPushButton("Hi There"), "Open")
-        tabs.setCurrentIndex(2)
+        shot_asset_type_label = QLabel("Shot Asset Type:")
+        shot_asset_name = QLineEdit("Shot Asset Name")
+        shot_asset_name.setFixedWidth(200)
+        shot_asset_create = QPushButton("Create Shot Asset")
 
-        self.setCentralWidget(tabs)
+        # Show asset creation elements       
+        self.show_asset_types = QComboBox()
+        show_asset_type_options = ["prop", "set", "char"]
+        self.show_asset_types.addItems(show_asset_type_options)
 
-        #widget = QWidget()
-        #widget.setLayout(layout)
-        #self.setCentralWidget(widget)
+        # Shot asset creation elements
+        self.shot_asset_types = QComboBox()
+        shot_asset_type_options = ["fx", "charfx", "lgt", "crowd"]
+        self.shot_asset_types.addItems(shot_asset_type_options)
+
+
+        # Setup show asset creation ui
+        show_asset = QWidget()
+        show_asset_layout = QHBoxLayout()
+        show_asset_layout.addWidget(show_asset_type_label)
+        show_asset_layout.addWidget(self.show_asset_types)
+        show_asset_layout.addWidget(show_asset_name)
+        show_asset_layout.addWidget(show_asset_create)
+        show_asset.setLayout(show_asset_layout)
+
+        # Setup shot asset creation ui
+        shot_asset = QWidget()
+        shot_asset_layout = QHBoxLayout()
+        shot_asset_layout.addWidget(shot_asset_type_label)
+        shot_asset_layout.addWidget(self.shot_asset_types)
+        shot_asset_layout.addWidget(shot_asset_name)
+        shot_asset_layout.addWidget(shot_asset_create)
+        shot_asset.setLayout(shot_asset_layout)
+
+
+        # Setup create asset tabs
+        create_tabs = QTabWidget()
+        create_tabs.setTabPosition(QTabWidget.North)
+        create_tabs.setTabShape(QTabWidget.TabShape.Rounded)
+        create_tabs.setMovable(False)
+
+        # Add tabs to create tabs
+        create_tabs.addTab(show_asset, "Show") # Replace with show asset creation setup
+        create_tabs.addTab(shot_asset, "Shot") # Replace with shot asset creation setup
+
+
+        # _________________ Core Tabs _________________
+
+        # Setup core tabs
+        core_tabs = QTabWidget()
+        core_tabs.setTabPosition(QTabWidget.North)
+        core_tabs.setTabShape(QTabWidget.TabShape.Rounded)
+        core_tabs.setMovable(False)
+
+        # Add tabs to core tabs
+        core_tabs.addTab(create_tabs, "Create Asset")
+        core_tabs.addTab(QLabel("Fetch latest"), "Sync")
+        core_tabs.addTab(QLabel("Open Shot File"), "Open Shot")
+        core_tabs.addTab(QLabel("Render Shot"), "Render")
+        core_tabs.addTab(QLabel("View Shot"), "View")
+
+        # Set opening tab
+        core_tabs.setCurrentIndex(1)
+
+        # core_tabs is central widget
+        self.setCentralWidget(core_tabs)
+
+
 
     # Button functionality
     def create_show(self):
@@ -86,6 +123,11 @@ class MainWindow(QMainWindow):
         current_show = mesa_api.Create()
         current_show.shot(seq_number, shot_number)
 
+    def test_sys(self):
+        subprocess.run(["pip", "list"])
+        #print("hello")
+        
+
 
 
 
@@ -93,9 +135,7 @@ class MainWindow(QMainWindow):
 
 # create app object
 app = QApplication(["Mesa"]) # App name in list
-
 window = MainWindow()
-window.setWindowIconText("Hi")
 window.show()
 
 app.exec()
